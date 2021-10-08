@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,18 +20,16 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
-     * The attributes that are mass assignable.
+     * The "type" of the auto-incrementing ID.
      *
+     * @var string
+     */
+    protected $keyType = 'integer';
+
+    /**
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-        'quotes'
-    ];
-
+    protected $fillable = ['waste_bank_id','master_name','no_customer', 'pickup_status_id', 'name', 'email', 'role', 'quotes', 'email_verified_at', 'password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token', 'current_team_id', 'profile_photo_path', 'phone', 'address', 'created_at', 'updated_at'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -68,7 +66,41 @@ class User extends Authenticatable
     public static function search($query)
     {
         return empty($query) ? static::query()
-            : static::where('name', 'like', '%'.$query.'%')
-                ->orWhere('email', 'like', '%'.$query.'%');
+            : static::where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function pickupStatus()
+    {
+        return $this->belongsTo('App\Models\PickupStatus');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function wasteBank()
+    {
+        return $this->belongsTo('App\Models\WasteBank');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function presences()
+    {
+        return $this->hasMany('App\Models\Presence');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function wasteDeposits()
+    {
+        return $this->hasMany('App\Models\WasteDeposit');
+    }
+
 }
+

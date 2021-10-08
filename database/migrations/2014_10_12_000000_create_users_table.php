@@ -24,7 +24,26 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
+            $table->string('phone')->nullable();
+            $table->longText('address')->nullable();
+            $table->string('master_name')->nullable();
+            $table->string('no_customer')->nullable();
+            $table->unsignedBigInteger('waste_bank_id')->nullable();
+            $table->unsignedBigInteger('pickup_status_id')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('pickup_status_id')
+                ->references('id')
+                ->on('pickup_statuses')
+                ->onDelete('restrict')
+                ->cascadeOnUpdate();
+
+            $table->foreign('waste_bank_id')
+                ->references('id')
+                ->on('waste_banks')
+                ->onDelete('restrict')
+                ->cascadeOnUpdate();
         });
     }
 
