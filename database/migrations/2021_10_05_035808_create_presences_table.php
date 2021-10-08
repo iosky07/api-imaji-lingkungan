@@ -15,13 +15,14 @@ class CreatePresencesTable extends Migration
     {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('customer_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('customers')
-                ->onDelete('restrict')
+                ->on('users')
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
         });
     }

@@ -2,24 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bd14425-d709-4013-b0cd-70d5e3ac331f" name="Default Changelist" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_10_06_034707_create_waste_details_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_26_202453_create_sessions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_26_202453_create_sessions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_14_175504_create_payment_statuses_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_14_175505_create_statuses_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_03_050924_create_table_product_types.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_04_012358_create_code_cash_books.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_04_013637_create_cash_books.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_04_023838_create_cash_notes.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050925_create_table_products.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050926_create_table_product_manufactures.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050927_create_table_transactions.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050928_create_table_transaction_details.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050929_create_table_transaction_credits.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050930_create_table_transaction_payments.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_14_050952_create_table_transaction_payment_details.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_15_060742_create_invoices.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_18_140538_create_transaction_returns.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_18_140540_create_transaction_return_details.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/CashBook.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/CashNote.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/CodeCashBook.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Invoice.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/PaymentStatus.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ProductManufacture.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ProductType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Status.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Transaction.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionCredit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionDetail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionPayment.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionPaymentDetail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionReturn.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TransactionReturnDetail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_10_05_034707_create_waste_details_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_10_05_035030_create_waste_banks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2013_10_05_035030_create_waste_banks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_10_05_035234_create_customers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_10_05_035808_create_presences_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_10_05_035808_create_presences_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,21 +205,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Middleware" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Laravel.SettingsForm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Middleware" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/resources/views/pdf" />
       <recent name="$PROJECT_DIR$/resources/views/livewire/table" />
       <recent name="$PROJECT_DIR$/resources/views/pages" />
-      <recent name="$PROJECT_DIR$/resources/views/pages/product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
@@ -258,6 +268,10 @@
       <workItem from="1630801303065" duration="2269000" />
       <workItem from="1633231247784" duration="1351000" />
       <workItem from="1633404823733" duration="1543000" />
+      <workItem from="1633407509297" duration="229000" />
+      <workItem from="1633407742952" duration="10055000" />
+      <workItem from="1633478302064" duration="3686000" />
+      <workItem from="1633484452652" duration="8624000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1630987348185</created>
