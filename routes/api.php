@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -21,6 +22,60 @@ use Illuminate\Support\Str;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+
+
+Route::post('/mapping/update', function (Request $request) {
+    User::find($request->id)->update([
+        'name' => $request->name,
+        'address' => $request->address,
+        'phone' => $request->phone,
+    ]);
+    return [
+        'message' => 'berhasil mengubah data',
+        'code' => 201,
+        'error' => ''
+    ];
+});
+
+Route::post('/mapping/update/location', function (Request $request) {
+    User::find($request->id)->update([
+        'latitude' => $request->latitude,
+        'longitude' => $request->longitude,
+    ]);
+    return [
+        'message' => 'berhasil menyesuaikan lokasi',
+        'code' => 201,
+        'error' => ''
+    ];
+});
+
+Route::post('/mapping/update/status', function (Request $request) {
+    User::find($request->id)->update([
+        'status' => $request->status,
+    ]);
+    return [
+        'message' => 'berhasil mengubah status',
+        'code' => 201,
+        'error' => ''
+    ];
+});
+Route::post('/mapping/update/photo', function (Request $request) {
+    $file = $request->file('file');
+    $filename = Str::slug($request->id . '-' . date('Hms')) . '.' . $request->file('file')->getClientOriginalExtension();
+    Storage::disk('local')->put('public/mapping/' . $filename, file_get_contents($file));
+
+    User::find(str_replace('"', '', $request->id))->update([
+        'profile_photo_path' => 'mapping/' . $filename,
+    ]);
+
+    return [
+        'message' => 'berhasil mengubah foto',
+        'code' => 201,
+        'error' => ''
+    ];
 });
 
 Route::post('login', function (Request $request) {
@@ -108,7 +163,7 @@ Route::post('logout', function (Request $request) {
 });
 
 
-Route::middleware('checkToken')->group(function () {
+//Route::middleware('checkToken')->group(function () {
     Route::get('/waste-bank/waste-total/{id}', function ($id) {
         $customer = DB::select("
 SELECT SUM(waste_deposit_details.amount) AS amount,waste_types.title
@@ -184,5 +239,5 @@ GROUP BY waste_types.title,users.name,users.id");
                 'data' => $customer->get()
             ];
         }
-    });
+//    });
 });

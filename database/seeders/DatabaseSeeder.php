@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
             'phone' => '082335456772',
             'address' => 'Jalan tawang mangu gg. 6 no. 10'
         ]);
+        User::create(['waste_bank_id' => 1, 'name' => 'Mawar Putih', 'email' => 'mp@mail.com', 'password' => bcrypt('password')]);
+        User::create(['waste_bank_id' => 2, 'name' => 'Sumber Rejeki', 'email' => 'sr@mail.com', 'password' => bcrypt('password')]);
+        User::create(['waste_bank_id' => 3, 'name' => 'Barokah Jaya', 'email' => 'bj@mail.com', 'password' => bcrypt('password')]);
         $no_customer = [
             10110,
             20105,
