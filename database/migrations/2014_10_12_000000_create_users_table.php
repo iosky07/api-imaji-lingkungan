@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->longText('address')->nullable();
             $table->string('master_name')->nullable();
             $table->string('no_customer')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->unsignedBigInteger('waste_bank_id')->nullable();
             $table->unsignedBigInteger('pickup_status_id')->nullable();
             $table->timestamps();
