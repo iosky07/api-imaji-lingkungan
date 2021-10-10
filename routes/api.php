@@ -54,7 +54,7 @@ Route::post('/mapping/update/location', function (Request $request) {
 
 Route::post('/mapping/update/status', function (Request $request) {
     User::find($request->id)->update([
-        'status' => $request->status,
+        'pickup_status_id' => $request->status,
     ]);
     return [
         'message' => 'berhasil mengubah status',
