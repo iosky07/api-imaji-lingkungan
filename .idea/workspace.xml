@@ -245,7 +245,7 @@
       <workItem from="1633484452652" duration="8624000" />
       <workItem from="1633662999353" duration="1666000" />
       <workItem from="1633676801771" duration="902000" />
-      <workItem from="1633820574698" duration="8181000" />
+      <workItem from="1633820574698" duration="8524000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1630987348185</created>
@@ -296,7 +296,21 @@
       <option name="project" value="LOCAL" />
       <updated>1633832806711</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update location api">
+      <created>1633833018957</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1633833018957</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update location api">
+      <created>1633833263038</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1633833263038</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
