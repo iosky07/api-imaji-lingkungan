@@ -257,19 +257,19 @@ Route::get('/customer/waste-bank/{id}', function ($id) {
             'users' => $customer->get()
         ];
     }
-    if ($customer->get()->count() == 0) {
-        return [
-            'status' => 'success',
-            'code' => 200,
-            'message' => 'tidak ada nasabah',
-        ];
-    } else {
+//    if ($customer->get()->count() == 0) {
+//        return [
+//            'status' => 'success',
+//            'code' => 200,
+//            'message' => 'tidak ada nasabah',
+//        ];
+//    } else {
         return [
             'status' => 'success',
             'code' => 200,
             'message' => 'berhasil menampilkan nasabah',
             'users' => $customer->get()
         ];
-    }
+//    }
 //    });
 });
