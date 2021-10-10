@@ -248,7 +248,7 @@ GROUP BY waste_types.title");
 //});
 
 Route::get('/customer/waste-bank/{id}', function ($id) {
-    $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id');
+    $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id')->get();
     if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
         return [
             'status' => 'success',
@@ -268,7 +268,7 @@ Route::get('/customer/waste-bank/{id}', function ($id) {
             'status' => 'success',
             'code' => 200,
             'message' => 'berhasil menampilkan nasabah',
-            'users' => $customer->get()
+            'users' => $customer
         ];
 //    }
 //    });
