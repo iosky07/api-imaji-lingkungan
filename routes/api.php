@@ -248,7 +248,7 @@ GROUP BY waste_types.title");
 //});
 
 Route::get('/customer/waste-bank/{id}', function ($id) {
-    $customer = User::whereWasteBankId($id)->ordeBy('pickup_status_id');
+    $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id');
     if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
         return [
             'status' => 'success',
