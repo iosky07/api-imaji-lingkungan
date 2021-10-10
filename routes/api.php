@@ -249,14 +249,14 @@ GROUP BY waste_types.title");
 
 Route::get('/customer/waste-bank/{id}', function ($id) {
     $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id')->get();
-    if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
-        return [
-            'status' => 'success',
-            'code' => 200,
-            'message' => 'seluruh nasabah telah dijemput',
-            'users' => $customer->get()
-        ];
-    }
+//    if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
+//        return [
+//            'status' => 'success',
+//            'code' => 200,
+//            'message' => 'seluruh nasabah telah dijemput',
+//            'users' => $customer->get()
+//        ];
+//    }
 //    if ($customer->get()->count() == 0) {
 //        return [
 //            'status' => 'success',
