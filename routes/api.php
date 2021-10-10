@@ -268,7 +268,7 @@ Route::get('/customer/waste-bank/{id}', function ($id) {
             'status' => 'success',
             'code' => 200,
             'message' => 'berhasil menampilkan nasabah',
-            'data' => $customer->get()
+            'users' => $customer->get()
         ];
     }
 //    });
