@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Models\WasteDeposit;
+use App\Models\WasteDepositDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,8 +25,6 @@ use Illuminate\Support\Str;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
 
 
 Route::post('/mapping/update', function (Request $request) {
@@ -161,11 +161,43 @@ Route::post('logout', function (Request $request) {
         'code' => 201,
     ];
 });
-
+Route::post('mapping/store', function (Request $request) {
+//    protected $fillable = ['user_id', 'note', 'created_at', 'updated_at'];
+    $wd = WasteDeposit::create(['user_id' => $request->user_id]);
+    if ($request->plastic == null) {
+        $request->plastic = 0;
+    }
+    if ($request->iron == null) {
+        $request->iron = 0;
+    }
+    if ($request->paper == null) {
+        $request->paper = 0;
+    }
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 3,
+        'amount' => $request->plastic,
+        'price' => 0,]);
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 2,
+        'amount' => $request->iron,
+        'price' => 0,]);
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 1,
+        'amount' => $request->paper,
+        'price' => 0,]);
+    return [
+        'status' => 'success',
+        'code' => 200,
+        'message' => 'Berhasil input sampah',
+    ];
+});
 
 //Route::middleware('checkToken')->group(function () {
-    Route::get('/waste-bank/waste-total/{id}', function ($id) {
-        $customer = DB::select("
+Route::get('/waste-bank/waste-total/{id}', function ($id) {
+    $customer = DB::select("
 SELECT SUM(waste_deposit_details.amount) AS amount,waste_types.title
 FROM users
 JOIN waste_deposits ON waste_deposits.user_id=users.id
@@ -173,25 +205,25 @@ JOIN waste_deposit_details ON waste_deposit_details.waste_deposit_id=waste_depos
 JOIN waste_types ON waste_deposit_details.waste_type_id=waste_types.id
 WHERE users.waste_bank_id=$id
 GROUP BY waste_types.title");
-        if (count($customer) == 0) {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'tidak ada nasabah',
-            ];
-        } else {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'berhasil menampilkan nasabah',
-                'waste' => $customer
-            ];
-        }
-    });
+    if (count($customer) == 0) {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'tidak ada nasabah',
+        ];
+    } else {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'berhasil menampilkan nasabah',
+            'waste' => $customer
+        ];
+    }
+});
 
 
-    Route::get('/customer/waste-total/{id}', function ($id) {
-        $customer = DB::select("
+Route::get('/customer/waste-total/{id}', function ($id) {
+    $customer = DB::select("
 SELECT SUM(waste_deposit_details.amount) AS amount,waste_types.title,users.name,users.id
 FROM users
 JOIN waste_deposits ON waste_deposits.user_id=users.id
@@ -199,45 +231,45 @@ JOIN waste_deposit_details ON waste_deposit_details.waste_deposit_id=waste_depos
 JOIN waste_types ON waste_deposit_details.waste_type_id=waste_types.id
 WHERE users.waste_bank_id=$id
 GROUP BY waste_types.title,users.name,users.id");
-        if (count($customer) == 0) {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'tidak ada nasabah',
-            ];
-        } else {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'berhasil menampilkan nasabah',
-                'customers' => $customer
-            ];
-        }
-    });
+    if (count($customer) == 0) {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'tidak ada nasabah',
+        ];
+    } else {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'berhasil menampilkan nasabah',
+            'customers' => $customer
+        ];
+    }
+});
 
-    Route::get('/customer/waste-bank/{id}', function ($id) {
-        $customer = User::whereWasteBankId($id)->ordeBy('pickup_status_id');
-        if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'seluruh nasabah telah dijemput',
-                'user' => $customer->get()
-            ];
-        }
-        if ($customer->get()->count() == 0) {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'tidak ada nasabah',
-            ];
-        } else {
-            return [
-                'status' => 'success',
-                'code' => 200,
-                'message' => 'berhasil menampilkan nasabah',
-                'data' => $customer->get()
-            ];
-        }
+Route::get('/customer/waste-bank/{id}', function ($id) {
+    $customer = User::whereWasteBankId($id)->ordeBy('pickup_status_id');
+    if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'seluruh nasabah telah dijemput',
+            'users' => $customer->get()
+        ];
+    }
+    if ($customer->get()->count() == 0) {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'tidak ada nasabah',
+        ];
+    } else {
+        return [
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'berhasil menampilkan nasabah',
+            'data' => $customer->get()
+        ];
+    }
 //    });
 });
