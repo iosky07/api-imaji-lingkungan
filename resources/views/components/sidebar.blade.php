@@ -22,7 +22,7 @@
                 "is_multi" => true,
             ];
             array_push($links, $add);
-        
+
         $navigation_links = array_to_object($links);
 @endphp
 

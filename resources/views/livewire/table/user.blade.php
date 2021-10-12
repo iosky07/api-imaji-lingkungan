@@ -30,7 +30,7 @@
                     <td>
                         @foreach($user->wasteDeposits as $wd)
                             {{$wd->created_at}}
-                            @foreach($user->wasteDepositDetails as $wdd)
+                            @foreach($wd->wasteDepositDetails as $wdd)
                                 {{$wdd->wasteType->title.' - '.$wdd->amount}}
                             @endforeach
                         @endforeach
