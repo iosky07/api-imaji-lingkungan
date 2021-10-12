@@ -6,7 +6,6 @@
             "is_multi" => false,
         ]
         ];
-    if (Auth::user()->role==4) {
         $add =
         [
             "href" =>
@@ -23,7 +22,7 @@
                 "is_multi" => true,
             ];
             array_push($links, $add);
-        }
+        
         $navigation_links = array_to_object($links);
 @endphp
 
