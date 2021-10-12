@@ -27,6 +27,14 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        @foreach($user->wasteDeposits as $wd)
+                            {{$wd->created_at}}
+                            @foreach($user->wasteDepositDetails as $wdd)
+                                {{$wdd->wasteType->title.' - '.$wdd->amount}}
+                            @endforeach
+                        @endforeach
+                    </td>
                     <td>{{ $user->created_at->format('d M Y H:i') }}</td>
                     <td class="whitespace-no-wrap row-action--icon">
                         <a role="button" href="user/edit/{{ $user->id }}" class="mr-3"><i class="fa fa-16px fa-pen"></i></a>
