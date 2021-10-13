@@ -257,7 +257,7 @@ Route::get('/customer/waste-bank/{id}', function ($id) {
         ];
 });
 Route::get('/customer/waste-bank/detail/{id}', function ($id) {
-    $customer = WasteDeposit::whereUserId($id)->get();
+    $customer = WasteDeposit::with('wasteDepositDetails')->whereUserId($id)->get();
     return [
         'status' => 'success',
         'code' => 200,
