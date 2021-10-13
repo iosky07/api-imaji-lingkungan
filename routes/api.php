@@ -163,7 +163,7 @@ Route::post('logout', function (Request $request) {
 });
 Route::post('mapping/store', function (Request $request) {
 //    protected $fillable = ['user_id', 'note', 'created_at', 'updated_at'];
-    $wd = WasteDeposit::create(['user_id' => $request->user_id]);
+    $wd = WasteDeposit::create(['user_id' => $request->user_id,'note'=>$request->note]);
     if ($request->plastic == null) {
         $request->plastic = 0;
     }
@@ -249,27 +249,29 @@ GROUP BY waste_types.title");
 
 Route::get('/customer/waste-bank/{id}', function ($id) {
     $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id')->get();
-//    if ($customer->get()->count() == $customer->wherePickupStatusId(3)->get()->count()) {
-//        return [
-//            'status' => 'success',
-//            'code' => 200,
-//            'message' => 'seluruh nasabah telah dijemput',
-//            'users' => $customer->get()
-//        ];
-//    }
-//    if ($customer->get()->count() == 0) {
-//        return [
-//            'status' => 'success',
-//            'code' => 200,
-//            'message' => 'tidak ada nasabah',
-//        ];
-//    } else {
         return [
             'status' => 'success',
             'code' => 200,
             'message' => 'berhasil menampilkan nasabah',
             'users' => $customer
         ];
-//    }
-//    });
+});
+Route::get('/customer/waste-bank/detail/{id}', function ($id) {
+    $customer = WasteDeposit::whereUserId($id)->get();
+    return [
+        'status' => 'success',
+        'code' => 200,
+        'message' => 'berhasil menampilkan data penjemputan',
+        'wasteDeposits' => $customer
+    ];
+});
+
+Route::get('/customer/waste-bank/detail/deposit/{id}', function ($id) {
+    $customer = WasteDeposit::whereUserId($id)->get();
+    return [
+        'status' => 'success',
+        'code' => 200,
+        'message' => 'berhasil menampilkan data penjemputan',
+        'wasteDeposits' => $customer
+    ];
 });
