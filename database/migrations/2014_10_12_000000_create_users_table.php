@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->unsignedBigInteger('waste_bank_id')->nullable();
-            $table->unsignedBigInteger('pickup_status_id')->nullable();
+            $table->unsignedBigInteger('pickup_status_id')->default(1);
             $table->timestamps();
 
 
