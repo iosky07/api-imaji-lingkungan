@@ -35,7 +35,7 @@ class Main extends Component
     {
         switch ($this->name) {
             case 'user':
-                $users = $this->model::search($this->search)
+                $users = $this->model::search($this->search,$this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
 
