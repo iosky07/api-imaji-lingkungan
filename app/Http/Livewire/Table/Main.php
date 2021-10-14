@@ -163,6 +163,24 @@ class Main extends Component
                     ])
                 ];
                 break;
+            case 'deposit':
+                $deposits = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+
+                return [
+                    "view" => 'livewire.table.deposit',
+                    "deposits" => $deposits,
+                    "data" => array_to_object([
+                        'href' => [
+                            'create_new' => route('admin.content.create'),
+                            'create_new_text' => 'Create new content',
+                            'export' => '#',
+                            'export_text' => 'Export'
+                        ]
+                    ])
+                ];
+                break;
 
             default:
                 # code...

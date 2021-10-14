@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CashBookController;
 use App\Http\Controllers\Admin\CashNoteController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -100,6 +101,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'veri
     Route::get('/user', [UserController::class, "index"])->name('user');
     Route::view('/user/new', "pages.user.create")->name('user.new');
     Route::view('/user/edit/{userId}', "pages.user.edit")->name('user.edit');
+    Route::view('/user/deposit-detail/{userId}', [DepositController::class, 'show'])->name('user.show');
 
     Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
         Route::group(['middleware' => ['auth', 'verified']], function () {
