@@ -1,31 +1,3 @@
-@php
-    use Illuminate\Support\Facades\Auth;$links = [
-        [
-            "href" => "admin.dashboard",
-            "text" => "Dashboard",
-            "is_multi" => false,
-        ]
-        ];
-        $add =
-        [
-            "href" =>
-            [
-                    [
-                        "section_text" => "User Pengepul",
-                        "section_list" => [
-                            ["href" => "admin.user", "text" => "Data User"],
-                            ["href" => "admin.user.new", "text" => "Buat User"]
-                            ]
-                    ],
-                ],
-                "text" => "Manajemen",
-                "is_multi" => true,
-            ];
-            array_push($links, $add);
-
-        $navigation_links = array_to_object($links);
-@endphp
-
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -36,33 +8,41 @@
                 <img class="d-inline-block" width="32px" height="30.61px" src="" alt="">
             </a>
         </div>
-        @foreach ($navigation_links as $link)
-            <ul class="sidebar-menu">
-                <li class="menu-header">{{ $link->text }}</li>
-                @if (!$link->is_multi)
-                    <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                    </li>
-                @else
-                    @foreach ($link->href as $section)
-                        @php
-                            $routes = collect($section->section_list)->map(function ($child) {
-                                return Request::routeIs($child->href);
-                            })->toArray();
-                            $is_active = in_array(true, $routes);
-                        @endphp
+        <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.dashboard')}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-header">Kelompok Sosial</li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.user',1)}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Mawar Putih</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.user',2)}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Sumber Rejeki</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.user',3)}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Barokah Jaya</span>
+                </a>
+            </li>
+            <li class="menu-header">Penjemputan</li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.pickup')}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Riwayat Penjemputan</span>
+                </a>
+            </li>
 
-                        <li class="dropdown {{ ($is_active) ? 'active' : '' }}">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-chart-bar"></i> <span>{{ $section->section_text }}</span></a>
-                            <ul class="dropdown-menu">
-                                @foreach ($section->section_list as $child)
-                                    <li class="{{ Request::routeIs($child->href) ? 'active' : '' }}"><a class="nav-link" href="{{ route($child->href) }}">{{ $child->text }}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
-        @endforeach
+        </ul>
     </aside>
 </div>

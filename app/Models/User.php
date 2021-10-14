@@ -29,7 +29,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['waste_bank_id','master_name','no_customer', 'pickup_status_id', 'name', 'email', 'role', 'quotes', 'email_verified_at', 'password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token', 'current_team_id', 'profile_photo_path', 'phone', 'address', 'created_at', 'updated_at'];
+    protected $fillable = ['waste_bank_id', 'master_name', 'no_customer', 'pickup_status_id', 'name', 'email', 'role', 'quotes', 'email_verified_at', 'password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token', 'current_team_id', 'profile_photo_path', 'phone', 'address', 'created_at', 'updated_at'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -63,11 +63,18 @@ class User extends Authenticatable
     /**
      * Search query in multiple whereOr
      */
-    public static function search($query)
+    public static function search($query,$id)
     {
-        return empty($query) ? static::query()
-            : static::where('name', 'like', '%' . $query . '%')
-                ->orWhere('email', 'like', '%' . $query . '%');
+        return empty($query) ? static::query()->whereWasteBankId($id)
+            : static::whereWasteBankId($id)->where(function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%')
+                    ->orWhere('email', 'like', '%' . $query . '%')
+                    ->orWhereHas('pickupStatus', function ($q) use ($query) {
+                        $q->where('title', 'like', '%' . $query . '%');
+                    })->orWhereHas('wasteBank', function ($q) use ($query) {
+                        $q->where('name', 'like', '%' . $query . '%');
+                    });
+            });
     }
 
     /**
