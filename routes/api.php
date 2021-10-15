@@ -195,6 +195,41 @@ Route::post('mapping/store', function (Request $request) {
     ];
 });
 
+Route::post('mapping/update', function (Request $request) {
+//    protected $fillable = ['user_id', 'note', 'created_at', 'updated_at'];
+    $wd = WasteDeposit::find($request->id)->update(['note'=>$request->note]);
+    WasteDepositDetail::whereWasteDepositId($request->id)->delete();
+    if ($request->plastic == null) {
+        $request->plastic = 0;
+    }
+    if ($request->iron == null) {
+        $request->iron = 0;
+    }
+    if ($request->paper == null) {
+        $request->paper = 0;
+    }
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 3,
+        'amount' => $request->plastic,
+        'price' => 0,]);
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 2,
+        'amount' => $request->iron,
+        'price' => 0,]);
+    WasteDepositDetail::create([
+        'waste_deposit_id' => $wd->id,
+        'waste_type_id' => 1,
+        'amount' => $request->paper,
+        'price' => 0,]);
+    return [
+        'status' => 'success',
+        'code' => 200,
+        'message' => 'Berhasil input sampah',
+    ];
+});
+
 //Route::middleware('checkToken')->group(function () {
 Route::get('/waste-bank/waste-total/{id}', function ($id) {
     $customer = DB::select("
