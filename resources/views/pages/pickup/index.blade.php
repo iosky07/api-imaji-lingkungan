@@ -12,6 +12,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th>id</th>
                 <th>Tanggal Penjemputan</th>
                 <th>Nama</th>
                 <th>Kelompok sosial</th>
@@ -25,6 +26,7 @@
 
             @foreach($wasteDeposits as $wd)
                 <tr>
+                    <td>{{$wd->id}}</td>
                     <td>{{ $wd->created_at->format('d M Y') }}</td>
                     <td>{{ $wd->user->name }}</td>
                     <td>{{ $wd->user->wasteBank->name }}</td>
