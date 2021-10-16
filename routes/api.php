@@ -209,17 +209,17 @@ Route::post('mapping/update', function (Request $request) {
         $request->paper = 0;
     }
     WasteDepositDetail::create([
-        'waste_deposit_id' => $wd->id,
+        'waste_deposit_id' => $request->id,
         'waste_type_id' => 3,
         'amount' => $request->plastic,
         'price' => 0,]);
     WasteDepositDetail::create([
-        'waste_deposit_id' => $wd->id,
+        'waste_deposit_id' => $request->id,
         'waste_type_id' => 2,
         'amount' => $request->iron,
         'price' => 0,]);
     WasteDepositDetail::create([
-        'waste_deposit_id' => $wd->id,
+        'waste_deposit_id' => $request->id,
         'waste_type_id' => 1,
         'amount' => $request->paper,
         'price' => 0,]);
