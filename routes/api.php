@@ -66,7 +66,6 @@ Route::post('/mapping/update/photo', function (Request $request) {
     $file = $request->file('file');
     $filename = Str::slug($request->id . '-' . date('Hms')) . '.' . $request->file('file')->getClientOriginalExtension();
     Storage::disk('local')->put('public/mapping/' . $filename, file_get_contents($file));
-
     User::find(str_replace('"', '', $request->id))->update([
         'profile_photo_path' => 'mapping/' . $filename,
     ]);
@@ -188,6 +187,10 @@ Route::post('mapping/store', function (Request $request) {
         'waste_type_id' => 1,
         'amount' => $request->paper,
         'price' => 0,]);
+    User::find($request->user_id)->update([
+        'pickup_status_id' => 3,
+    ]);
+
     return [
         'status' => 'success',
         'code' => 200,
@@ -255,32 +258,6 @@ GROUP BY waste_types.title");
         ];
     }
 });
-
-
-//Route::get('/customer/waste-total/{id}', function ($id) {
-//    $customer = DB::select("
-//SELECT SUM(waste_deposit_details.amount) AS amount,waste_types.title,users.name,users.id
-//FROM users
-//JOIN waste_deposits ON waste_deposits.user_id=users.id
-//JOIN waste_deposit_details ON waste_deposit_details.waste_deposit_id=waste_deposits.id
-//JOIN waste_types ON waste_deposit_details.waste_type_id=waste_types.id
-//WHERE users.waste_bank_id=$id
-//GROUP BY waste_types.title,users.name,users.id");
-//    if (count($customer) == 0) {
-//        return [
-//            'status' => 'success',
-//            'code' => 200,
-//            'message' => 'tidak ada nasabah',
-//        ];
-//    } else {
-//        return [
-//            'status' => 'success',
-//            'code' => 200,
-//            'message' => 'berhasil menampilkan nasabah',
-//            'customers' => $customer
-//        ];
-//    }
-//});
 
 Route::get('/customer/waste-bank/{id}', function ($id) {
     $customer = User::whereWasteBankId($id)->orderBy('pickup_status_id')->get();
