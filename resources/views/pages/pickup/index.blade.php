@@ -32,10 +32,10 @@
                     <td>{{ $wd->user->name }}</td>
                     <td>{{ $wd->user->wasteBank->name }}</td>
 {{--                    @php($total=0)--}}
-{{--                    @foreach($wd->wasteDepositDetails as $wdd)--}}
-{{--                        <td>{{ $wdd->amount }}</td>--}}
+                    @foreach($wd->wasteDepositDetails as $wdd)
+                        <td>{{ $wdd->amount }}</td>
 {{--                        @php($total+=$wdd->amount*$wdd->wasteType->price )--}}
-{{--                    @endforeach--}}
+                    @endforeach
 {{--                    <td>--}}
 {{--                        Rp. {{number_format($total,0,'.','.')}}--}}
 {{--                    </td>--}}
