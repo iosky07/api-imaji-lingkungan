@@ -29,7 +29,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['waste_bank_id', 'master_name', 'no_customer', 'pickup_status_id', 'name', 'email', 'role', 'quotes', 'email_verified_at', 'password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token', 'current_team_id', 'profile_photo_path', 'phone', 'address', 'created_at', 'updated_at'];
+    protected $fillable = ['waste_bank_id', 'master_name', 'no_customer', 'pickup_status_id', 'name', 'email', 'role', 'quotes', 'email_verified_at', 'password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token', 'current_team_id', 'profile_photo_path', 'phone', 'address', 'created_at', 'updated_at','latitude','longitude'];
     /**
      * The attributes that should be hidden for arrays.
      *

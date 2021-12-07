@@ -11,6 +11,7 @@
                         @include('components.sort-icon', ['field' => 'name'])
                     </a></th>
                 <th>Jumlah setor</th>
+                <th>Nominal setor</th>
                 <th>
                     <a wire:click.prevent="sortBy('pickup_status_id')" role="button" href="#">
                         Status penjemputan
@@ -26,7 +27,8 @@
                     <td>{{ $index+1 }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->wasteDeposits->count() }}</td>
-                    <td style="color: {{ $user->pickup_status_id==1?'red':$user->pickup_status_id==2?'orange':'green'}};font-weight: bold">{{ $user->pickupStatus->title }}</td>
+                    <td>{{ $user->wasteDeposits->sum('total') }}</td>
+                    <td style="font-weight: bold">{{ $user->pickupStatus->title }}</td>
                     <td class="whitespace-no-wrap row-action--icon">
                         <a role="button" href="user/edit/{{ $user->id }}" class="mr-3"><i class="fa fa-16px fa-pen"></i></a>
                         <a role="button" href="deposit-detail/{{ $user->id }}" class="mr-3"><i
