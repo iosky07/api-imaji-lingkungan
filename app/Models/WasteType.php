@@ -16,7 +16,7 @@ class WasteType extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -24,7 +24,7 @@ class WasteType extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'range_price', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'price', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -32,5 +32,10 @@ class WasteType extends Model
     public function wasteDepositDetails()
     {
         return $this->hasMany('App\Models\WasteDepositDetail');
+    }
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('title', 'like', '%' . $query . '%');
     }
 }

@@ -19,6 +19,7 @@
                 @foreach(\App\Models\WasteType::get() as $wt)
                     <th>{{ $wt->title }}</th>
                 @endforeach
+{{--                <th>Total didapat</th>--}}
                 <th>Keterangan</th>
             </tr>
 
@@ -30,9 +31,14 @@
                     <td>{{ $wd->created_at->format('d M Y') }}</td>
                     <td>{{ $wd->user->name }}</td>
                     <td>{{ $wd->user->wasteBank->name }}</td>
-                    @foreach($wd->wasteDepositDetails as $wdd)
-                        <td>{{ $wdd->amount }}</td>
-                    @endforeach
+{{--                    @php($total=0)--}}
+{{--                    @foreach($wd->wasteDepositDetails as $wdd)--}}
+{{--                        <td>{{ $wdd->amount }}</td>--}}
+{{--                        @php($total+=$wdd->amount*$wdd->wasteType->price )--}}
+{{--                    @endforeach--}}
+{{--                    <td>--}}
+{{--                        Rp. {{number_format($total,0,'.','.')}}--}}
+{{--                    </td>--}}
                     <td>{{ $wd->note }}</td>
                 </tr>
             @endforeach

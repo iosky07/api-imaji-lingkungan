@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WasteTypeController;
 use App\Models\CashBook;
 use App\Models\CashNote;
 use App\Models\Product;
@@ -49,8 +50,10 @@ Route::get('simple-qr-code', function () {
 Route::name('admin.')->prefix('admin')->middleware(['auth:sanctum', 'web', 'verified'])->group(function () {
     Route::post('/summernote-upload', [SupportController::class, 'upload'])->name('summernote_upload');
     Route::view('/dashboard', "dashboard")->name('dashboard');
+    Route::resource('wasteType', WasteTypeController::class)->only('index','create','edit');
 
     Route::get('/user/{id}', [UserController::class, "index"])->name('user');
+    Route::get('/user/recap/{id}', [UserController::class, "recap"])->name('user.recap');
     Route::view('/user/new', "pages.user.create")->name('user.new');
     Route::view('/user/edit/{userId}', "pages.user.edit")->name('user.edit');
     Route::get('/user/deposit-detail/{userId}', [UserController::class, "show"])->name('user.show');

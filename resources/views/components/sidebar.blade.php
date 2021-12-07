@@ -16,6 +16,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="">
+                <a class="nav-link" href="{{route('admin.wasteType.index')}}">
+                    <i class="fas fa-fire"></i>
+                    <span>Komoditas</span>
+                </a>
+            </li>
             <li class="menu-header">Kelompok Sosial</li>
             <li class="">
                 <a class="nav-link" href="{{route('admin.user',1)}}">

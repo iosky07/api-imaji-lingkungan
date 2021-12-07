@@ -17,7 +17,7 @@ class WasteDeposit extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -25,7 +25,7 @@ class WasteDeposit extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'note', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'note','total', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
